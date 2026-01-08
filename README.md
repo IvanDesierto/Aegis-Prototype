@@ -39,7 +39,7 @@ Run reader.py. The system will automatically list all compatible assets found in
 
 **[!CAUTION] WARNING:** Attempting to open an Aegis file on unauthorized hardware will result in the permanent destruction of the file. Do not move encrypted assets to other machines unless the recipient hardware is pre-authorized.
 
-##🧪 Technical Logic
+## 🧪 Technical Logic
 Aegis utilizes Symmetric AES Encryption (Fernet). The key-derivation pipeline follows this path:
 
 **Identity:** Capture Hardware UUID/MAC.
@@ -50,5 +50,5 @@ Aegis utilizes Symmetric AES Encryption (Fernet). The key-derivation pipeline fo
 
 **Application:** Fernet Cipher Initialization.
 
-##🛡️ Security Disclaimer
+## 🛡️ Security Disclaimer
 This project is intended for educational purposes and personal data obfuscation. While it utilizes strong AES encryption, the "Self-Destruct" mechanism is software-based. Professional forensic tools or manual script modification may bypass certain local security checks.
