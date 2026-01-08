@@ -1,9 +1,9 @@
 import uuid, sys, hashlib, base64, os
-from cryptography.fernet import fernet, InvalidToken
+from cryptography.fernet import Fernet, InvalidToken
 
 def get_hardware_key(MAC):
     byte_key = str(MAC).encode()
-    hash_digest = hashlib.sha256(MAC).digest()
+    hash_digest = hashlib.sha256(byte_key).digest()
     return base64.urlsafe_b64encode(hash_digest)
 
 def self_destruct(file_name):
@@ -29,11 +29,12 @@ def main():
     with open(file_name, "rb") as f:
         full_content = f.read()
 
-    if not full_content.startswith(b"Sentinel-V1:"):
+    header = b"SENTINEL-V1:"
+    if not full_content.startswith(header):
         print("Error: invalid file format")
         return
     
-    encrypted_payload = full_content[len(b"SENTINEL-V1:"):]
+    encrypted_payload = full_content[len(header):]
     
     current_MAC = uuid.getnode()
     key = get_hardware_key(current_MAC)
@@ -49,7 +50,7 @@ def main():
     
     except InvalidToken:
        
-        self_destruct(file_path)
+        self_destruct(file_name)
 
 if __name__ == "__main__":
     main()

@@ -14,10 +14,12 @@ def create_sentinel_file():
     file_name = input("Enter name of file: ")
     secret_data = input("Enter data to lock: ")
     
-    encrypted_data = cipher.encrypt(secret_data.encode())   
+    encrypted_data = cipher.encrypt(secret_data.encode())  
+
+    header = b"SENTINEL-V1:"
 
     with open(file_name, "wb") as f:
-        f.write(b"SENTINEL-V1:")
+        f.write(header)
         f.write(encrypted_data)
 
     print(f"\n Successfully created {file_name}")
