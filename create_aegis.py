@@ -7,7 +7,7 @@ def get_hardware_key(MAC):
     return base64.urlsafe_b64encode(hash_digest)
 
 def create_aegis_file():
-    MAC = uuid.getnode()
+    MAC = uuid.getnode()    
     MAC_key = get_hardware_key(MAC)
     cipher = Fernet(MAC_key)
 
